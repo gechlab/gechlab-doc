@@ -16,6 +16,7 @@ release = '0.1'
 
 extensions = [
     "sphinx.ext.todo", # Adds todo directive
+    "sphinx_copybutton",
 ]
 
 templates_path = ['_templates']
