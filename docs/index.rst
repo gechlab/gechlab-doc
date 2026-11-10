@@ -19,5 +19,7 @@ The material is provided *as it is* with a GNU GPL Licence version
 
    getting-started
    software/pflotran
+   software/python
+	     
    
 
