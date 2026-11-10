@@ -17,7 +17,7 @@ your project.
 
 To get a list of computing nodes you have access to, you can use:
 
-.. code-block::
+.. code-block:: bash
    
    sacctmgr show User $USER --associations
 
@@ -47,7 +47,7 @@ important to select the compiler module (for example, `gcc`) and the MPI library
 
 To show all the modules that contain the keyword `gcc`, you can use
 
-.. code-block::
+.. code-block:: bash
 
    module avail gcc
 
@@ -59,20 +59,20 @@ libraries compatible with this version.
 
 To load the gcc module
 
-..  code-block::
+..  code-block:: bash
 
     module load gcc/13.1.0-gcc-8.5.0-65vbkj2
 
 
 The next module to select is the one related to the MPI libraries.
 
-.. code-block::
+.. code-block:: bash
 
    module avail openmpi
 
 We then load
 
-.. code-block::
+.. code-block:: bash
 
    module load openmpi/4.1.5-gcc-13.1.0-crgm5zc
 
