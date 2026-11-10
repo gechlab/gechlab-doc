@@ -6,10 +6,12 @@
 GECH Lab. Documentation 
 =====================================
 
-Add your content using ``reStructuredText`` syntax. See the
-`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
-documentation for details.
+This *unofficial* documentation contains some notes about tools and
+software that are used by the `Geophysics for the Environment and the
+Cultural Heritage lab <https://sites.unimi.it/gechlab/>`_.
 
+The material is provided *as it is* with a GNU GPL Licence version
+3.0. See the attached LICENSE file in the github repository for more details.
 
 .. toctree::
    :maxdepth: 1

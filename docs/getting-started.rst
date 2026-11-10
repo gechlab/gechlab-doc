@@ -1,5 +1,11 @@
 Getting started
 =======================
 
-bla bla
+
+
+.. todo::
+
+   Write this introductory section.
+
+
 
