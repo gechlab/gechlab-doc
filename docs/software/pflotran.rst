@@ -12,10 +12,10 @@ Log into a computing node
 
 When you only log in into the cluster, you are landing on a *log-in*
 node. To perform all the next step you have to connect to a computing
-note, possibly with the same architechture that you expect to use for
+note, possibly with the same architecture that you expect to use for
 your project.
 
-To get a list of computing nodes you have acces to, you can use:
+To get a list of computing nodes you have access to, you can use:
 
 .. code-block::
    
@@ -35,7 +35,7 @@ To log in, you can use the command `salloc`. For example, if you have access to 
    salloc -p light --time=30
 
 The optional argument `--time=30` allows you to set the maximum time
-you request for interacting with the node. Aftern that time, you will
+you request for interacting with the node. After that time, you will
 be logged out.
 
 
@@ -51,9 +51,9 @@ To show all the modules that contain the keyword `gcc`, you can use
 
    module avail gcc
 
-Fron the list of modules, we select the one provided for the `x86_64`
-architecture (in general, it should be compatibile with the
-architechture of the node where you will run your code). We select
+From the list of modules, we select the one provided for the `x86_64`
+architecture (in general, it should be compatible with the
+architecture of the node where you will run your code). We select
 version `13` of gcc. Therefore, I have to be careful to always load
 libraries compatible with this version.
 
@@ -79,7 +79,7 @@ We then load
 .. note::
    
    By default the two aforementioned modules (`gcc` and `openmpi`) are
-   not loaded in your computing node.  You should inlcude them in the
+   not loaded in your computing node.  You should include them in the
    slurm/login script or load them manually when needed.
 
 
@@ -149,7 +149,7 @@ Installing PETSc
       make PETSC_DIR=/myproject/software/petsc PETSC_ARCH=arch-linux-c-opt all
       xxx=============================================================================xxx
 
-   Adapt the code above or simply copy the provided instuction, that is someting like
+   Adapt the code above or simply copy the provided instruction, that is something like
 
    .. code-block::
 
@@ -158,7 +158,7 @@ Installing PETSc
 5. Concluding remarks
 
    In the end it is suggested to run some test. Probably they will not
-   work even if the installation was successfult, because they will
+   work even if the installation was successful, because they will
    require a proper configuration. Skip them.
 
 
@@ -166,7 +166,7 @@ Installing PETSc
 Installing PFLOTRAN
 ------------------------------
 
-1. First of all, you have to set up some eviromental variables arisen from the PETSc installation.
+1. First of all, you have to set up some environmental variables arisen from the PETSc installation.
    You should therefore do
 
    .. code-block::
@@ -192,5 +192,30 @@ Installing PFLOTRAN
       make pflotran
 
       
+
+
+Calling PFLOTRAN in your scripts
+-----------------------------------------------
+
+First of all, it is in any case useful to define an environment variable
+to set the folder where PFLOTRAN was installed.
+Adding in your script one line like:
+
+.. code:: bash
+
+	  export PFLOTRAN_DIR=/exa/myproject/software/pflotran
+
+should be enough.
+
+Then, if you want that the executable file to be easily accessible without the full definition of the installation path,
+you can include it in your ``PATH`` environment variable. Add to your script the
+following:
+
+.. code:: bash
+
+	  export PATH=$PATH:$PFLOTRAN_DIR/src/pflotran
+
+and that should be fine.
+
 
 
