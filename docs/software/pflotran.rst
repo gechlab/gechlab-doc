@@ -203,7 +203,7 @@ Adding in your script one line like:
 
 .. code:: bash
 
-	  export PFLOTRAN_DIR=/exa/myproject/software/pflotran
+	  export PFLOTRAN_DIR=/exa/projects/myproject/software/pflotran
 
 should be enough.
 
