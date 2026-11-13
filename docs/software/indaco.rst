@@ -1,88 +1,81 @@
 INDACO
-==================
+======
 
-This document is simply a `cheat sheet` of some commands useful to
-interact with the INDACO platform.
+This page is a quick reference to commands for working with the INDACO
+platform.
 
 General utilities
--------------------------------
+-----------------
 
-Show the available partitions
-    Once you are loggen in, it is often
-    useful to know to which *partition* you user has access to.
-    This can be verifie with:
+Show the partitions available to your account
+    After logging in, you can check which partitions are associated with your
+    account by running:
 
     .. code-block:: bash
-		    
-       sacctmgr show User $USER --associations
 
-    The *Partition* column contains the names of the available
-    partitions for the corresponding *project* (*Account*).
+       sacctmgr show User "$USER" --associations
 
-    An alternative command should be
+    Check the *Partition* column for the partitions associated with each
+    project, shown in the *Account* column.
+
+    You can also list the partitions configured on the cluster with:
 
     .. code-block:: bash
 
        scontrol show partition
 
-    
-Log into a partition in interactive mode
-    Once you know which partition you can use, you can have access to it in an
-    interactive mode with:
+    This command may show partitions that are not available to your account.
 
-    ..  code-block:: bash
+Request an interactive allocation
+    Once you know which partition you can use, request an interactive
+    allocation with:
 
-	salloc -p <name_of_the_partition> --time=30
+    .. code-block:: bash
 
-    The optional argument ``--time`` is useful if you want to interact with the
-    partition for at maximum 30 minuters, which is more than the defaul value available
-    when this option is not specified.
+       salloc -p <partition_name> --time=30
 
+    The ``--time=30`` option sets a 30-minute time limit for the allocation.
+    If you omit ``--time``, Slurm uses its default time limit, which in some cases can have
+    a relatively small default value.
 
 Working with modules
--------------------------------
+--------------------
 
-Of course, before loading a module, you should first find its name.
+Before loading a module, find its name and check which versions are available.
 
-For example, if you want to check if the library `BLAS` is available and on which module name, you can do
+For example, to search for BLAS-related modules, run:
 
 .. code-block:: bash
 
-   module avail 2>&1 | grep blas
+   module avail 2>&1 | grep -i blas
 
-Then, if available, you should select the library in agreement with
-the architecture of your partition and with the compiler version.
+Choose a module version that is compatible with your partition's architecture
+and the compiler version you plan to use.
 
+Submitting jobs
+---------------
 
-Job sumission
----------------------------
-
-If you want to know how busy the cluster is, you can type
+To see the jobs currently in the cluster queue, run:
 
 .. code-block:: bash
 
    squeue
 
-To have a shorter list, containing only informations related to your user, use
+To show only your jobs, run:
 
 .. code-block:: bash
 
-   squeue -u $USER
+   squeue -u "$USER"
 
-This will also list the ID of your submitted jobs, which allows you to
-kill it in case of need.
+The output includes each job's ID. To cancel one of your jobs, run:
 
-If you want to submit a job using a slurm batch file, you should first prepare a suitable script following the guidelines provided in the INDACO web page.
-Then, the batch script can be submitted as
+.. code-block:: bash
+
+   scancel <job_id>
+
+To submit a batch job, first prepare a Slurm script following the guidelines
+on the INDACO website. Then submit it with:
 
 .. code-block:: bash
 
    sbatch myscript.slurm
-
-   
-
-
-
-    
-
-    
