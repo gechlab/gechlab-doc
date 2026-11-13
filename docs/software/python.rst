@@ -1,95 +1,99 @@
 Python
-====================
+======
 
-If you do not have any specific requirement for the Python libraries
-to be used in INDACO, then you can `load` the provided Python modules
-and that should be enough.
+There are two ways to use Python on INDACO:
 
-If instead you need some specific needs for some Python libraries,
-then it is probably better to install a Python environment directly in
-your project. One of the possibilities is to install Miniconda.
+- **Provided modules**: if you have no specific requirements for Python
+  libraries, load one of the Python modules provided on INDACO
+  (``module load``). This is usually enough.
+- **Your own environment**: if you need specific libraries or versions,
+  install a Python environment in your project directory. One option is
+  `Miniconda <https://docs.conda.io/en/latest/miniconda.html>`_, described below.
+
+.. note::
+
+   In the examples below, replace ``/exa/projects/myproject`` with the path of
+   your own project directory, and ``myenvname`` with a name of your choice
+   for the environment.
+
 
 Installing Miniconda
------------------------------
+--------------------
 
-To install Miniconda, you can follow the guidelines provided in the
-`Miniconda Installation web page
+For the full details, see the `Miniconda installation page
 <https://continuumio-docs.readthedocs-hosted.com/miniconda/install/>`_.
+In brief, assuming you have a ``software`` folder inside your project
+directory:
 
-In brief, suppose that you have a folder ``software`` inside your project directory.
-
-1. Move to the installation folder, for example:
-
-   .. code:: bash
-
-	     cd /exa/myproject/software
-	     
-2. Download Miniconda:
+1. Move to the installation folder:
 
    .. code:: bash
 
-	     wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+      cd /exa/projects/myproject/software
 
-3. Verify installer's integrity (Optional, see the link for more details)
-4. Install:
+2. Download the Miniconda installer:
 
    .. code:: bash
 
-	     bash Miniconda3-latest-Linux-x86_64.sh
+      wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 
-5. Skip the initialization of the default ``base`` virtual environment.
+3. (Optional) Verify the integrity of the installer. See the installation
+   page linked above for details.
+
+4. Run the installer:
+
+   .. code:: bash
+
+      bash Miniconda3-latest-Linux-x86_64.sh
+
+5. When asked, **do not** initialize the default ``base`` environment.
 
 
-Create a virtual environment
--------------------------------------------
+Creating a virtual environment
+------------------------------
 
-Sometimes it is required to at least temporarily set up your environment variable to use ``conda``.
-You can do by writing something like:
-
-.. code:: bash
-
-	  eval "$(/home/users/username/myproject/software/miniconda3/bin/conda shell.bash hook)"
-
-In this way to should be able to create a Python virtual environment
-(replace ``myenvname`` with an appropriate name for your environment.)
-
-.. code:: bash
-
-	  conda create --name myenvname
-
-Once the environment is created, you can activate it an install the required libraries, for example
+Since you skipped the initialization of ``base``, you first need to make
+``conda`` available in your current shell session:
 
 .. code:: bash
 
-	  conda activate myenvname
-	  conda install numpy scipy matplotlib h5py
+   eval "$(/exa/projects/myproject/software/miniconda3/bin/conda shell.bash hook)"
 
-Once finished, you can deactivate the environment
-
-.. code:: bash
-
-	  conda deactivate
-
-
-Use Python within a script
---------------------------------------
-
-If you have a `bash` script that you want to run during an interactive
-session or a `slurm` batch file to submit with `sbatch`, you have to
-add a couple of lines to
-
-- set up the environment variables to allow loading `conda` and the corresponding `Python`;
-- activate the corresponding virtual environment
-
-The two lines to add should look something like this:
+You can then create a virtual environment:
 
 .. code:: bash
 
-	  source /exa/projects/myproject/software/miniconda3/etc/profile.d/conda.sh
-	  conda activate myenvname
+   conda create --name myenvname
 
-Then, inside your script, you can call any python script like ``python myscript.py``.
+Once created, activate the environment and install the libraries you need,
+for example:
+
+.. code:: bash
+
+   conda activate myenvname
+   conda install numpy scipy matplotlib h5py
+
+When you are done, deactivate the environment:
+
+.. code:: bash
+
+   conda deactivate
 
 
+Using Python in a script
+------------------------
 
+To use your environment in a ``bash`` script (run in an interactive session)
+or in a ``slurm`` batch file (submitted with ``sbatch``), add two lines
+before any Python command:
 
+- the first makes ``conda`` available, so the right ``python`` can be found;
+- the second activates your virtual environment.
+
+.. code:: bash
+
+   source /exa/projects/myproject/software/miniconda3/etc/profile.d/conda.sh
+   conda activate myenvname
+
+After that, you can run Python scripts as usual, for example
+``python myscript.py``.
